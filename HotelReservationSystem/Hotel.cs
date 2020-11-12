@@ -8,8 +8,8 @@ namespace HotelReservationSystem
     {
         //Variables
         public string hotelName;
-        public int weekDayRegularRates;
-        public int weekendRegularRates;
+        public int weekDayRates;
+        public int weekendRates;
         public int hotelRatings;
         public int totalPrice;
 
@@ -33,11 +33,11 @@ namespace HotelReservationSystem
         /// <param name="weekDayRegularRates">The week day regular rates.</param>
         /// <param name="weekendRegularRates">The weekend regular rates.</param>
         /// <param name="hotelRatings">The hotel ratings.</param>
-        public Hotel(string hotelName , int weekDayRegularRates , int weekendRegularRates , int hotelRatings)
+        public Hotel(string hotelName , int weekDayRates, int weekendRates, int hotelRatings)
         {
             this.hotelName = hotelName;
-            this.weekDayRegularRates = weekDayRegularRates;
-            this.weekendRegularRates = weekendRegularRates;
+            this.weekDayRates = weekDayRates;
+            this.weekendRates = weekendRates;
             this.hotelRatings = hotelRatings;
         }
     }

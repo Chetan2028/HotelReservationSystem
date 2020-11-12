@@ -19,16 +19,35 @@ namespace HotelReservationSystem
         /// UC1
         /// Adds the hotels.
         /// </summary>
-        public void AddHotels()
+        public void AddHotels(string customer)
         {
-            hotelList.Add(new Hotel("Lakewood", 110, 90, 3));
-            hotelList.Add(new Hotel("Bridgewood", 150, 50, 4));
-            hotelList.Add(new Hotel("Ridgewood", 220, 150, 5));
-
-            Console.WriteLine("Hotels are added in List");
-            foreach (Hotel hotels in hotelList)
+            if(customer.Equals("Regular",StringComparison.InvariantCultureIgnoreCase))
             {
-                Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRegularRates} , WeekendRates : {hotels.weekendRegularRates} , Rating : {hotels.hotelRatings}");
+                hotelList.Add(new Hotel("Lakewood", 110, 90, 3));
+                hotelList.Add(new Hotel("Bridgewood", 150, 50, 4));
+                hotelList.Add(new Hotel("Ridgewood", 220, 150, 5));
+
+                Console.WriteLine("Hotels for {0} customer added in List",customer);
+                foreach (Hotel hotels in hotelList) 
+                {
+                    Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRates} , WeekendRates : {hotels.weekendRates} , Rating : {hotels.hotelRatings}");
+                }
+            }
+            else if(customer.Equals("reward", StringComparison.InvariantCultureIgnoreCase))
+            {
+                hotelList.Add(new Hotel("Lakewood", 80, 80, 3));
+                hotelList.Add(new Hotel("Bridgewood", 110, 50, 4));
+                hotelList.Add(new Hotel("Ridgewood", 100, 400, 5));
+
+                Console.WriteLine("Hotels for {0} customer added in List",customer);
+                foreach (Hotel hotels in hotelList)
+                {
+                    Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRates} , WeekendRates : {hotels.weekendRates} , Rating : {hotels.hotelRatings}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid customer type");
             }
         }
 
@@ -63,11 +82,11 @@ namespace HotelReservationSystem
                     {
                         if (daysList[index].ToString().Equals("Saturday") || daysList[index].ToString().Equals("Sunday"))
                         {
-                            total = total + hotels.weekendRegularRates;
+                            total = total + hotels.weekendRates;
                         }
                         else
                         {
-                            total = total + hotels.weekDayRegularRates;
+                            total = total + hotels.weekDayRates;
                         }
                     }
                     ratesAndHotelsList.Add(new Hotel(total, hotels.hotelName, hotels.hotelRatings));
