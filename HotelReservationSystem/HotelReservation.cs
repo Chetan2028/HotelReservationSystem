@@ -41,7 +41,7 @@ namespace HotelReservationSystem
                 foreach (Hotel hotels in hotelList)
                 {
                     int total = 0;
-                    for (int i = 0; i < diff.TotalDays; i++)
+                    for (int i = 0; i <= diff.TotalDays; i++)
                     {
                         total = total + hotels.weekDayRegularRates;
                     }
