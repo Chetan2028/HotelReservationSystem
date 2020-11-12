@@ -10,6 +10,9 @@ namespace HotelReservationSystem
 {
     class HotelReservation
     {
+        //Create a reference of Nlog class
+        Nlog nlog = new Nlog();
+
         //Adding hotels in list
         List<Hotel> hotelList = new List<Hotel>();
         //Adding hotel names and rates 
@@ -38,6 +41,8 @@ namespace HotelReservationSystem
                     {
                         Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRates} , WeekendRates : {hotels.weekendRates} , Rating : {hotels.hotelRatings}");
                     }
+                    nlog.LogDebug("Debug Successfull  : AddHotels(string customer)");
+                    nlog.LogInfo("AddHotels(string customer) : passed");
                 }
                 else if (customer.Equals("reward", StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -50,9 +55,13 @@ namespace HotelReservationSystem
                     {
                         Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRates} , WeekendRates : {hotels.weekendRates} , Rating : {hotels.hotelRatings}");
                     }
+                    nlog.LogDebug("Debug Successfull  : AddHotels(string customer)");
+                    nlog.LogInfo("AddHotels(string customer) : passed");
                 }
                 else
                 {
+                    nlog.LogError("Incorrect customer details");
+                    nlog.LogDebug("Debug Unsuccessfull");
                     throw new HotelReservationCustomException(HotelReservationCustomException.ExceptionType.INVALID_CUSTOMER, "Customer is Invalid");
                 }
             }
@@ -106,9 +115,13 @@ namespace HotelReservationSystem
                         ratesAndHotelsList.Add(new Hotel(total, hotels.hotelName, hotels.hotelRatings));
                         Console.WriteLine($"Hotel : {hotels.hotelName} \tPrice : {total} \tRating : {hotels.hotelRatings}");
                     }
+                    nlog.LogDebug("Debug successfull : CalculatingHotelPrices()");
+                    nlog.LogInfo("CalculatingHotelPrices() : passed");
                 }
                 else
                 {
+                    nlog.LogError("Wrong dates are entered");
+                    nlog.LogDebug("Debug Unsuccessfull : CalculatingHotelPrices()");
                     throw new HotelReservationCustomException(HotelReservationCustomException.ExceptionType.INVALID_DATE, "Invalid Dates");
                 }
             }
@@ -116,7 +129,6 @@ namespace HotelReservationSystem
             {
                 Console.WriteLine(ex.Message);
             }
-            
         }
 
         /// <summary>

@@ -1,0 +1,20 @@
+﻿2020-11-12 22:39:43.7366|DEBUG|HotelReservationSystem.Nlog|Debug Successfull  : AddHotels(string customer)
+2020-11-12 22:39:43.9908|INFO|HotelReservationSystem.Nlog|AddHotels(string customer) : passed
+2020-11-12 22:39:44.0056|DEBUG|HotelReservationSystem.Nlog|Debug successfull : CalculatingHotelPrices()
+2020-11-12 22:39:44.0056|INFO|HotelReservationSystem.Nlog|CalculatingHotelPrices() : passed
+2020-11-12 22:40:47.0128|DEBUG|HotelReservationSystem.Nlog|Debug Successfull  : AddHotels(string customer)
+2020-11-12 22:40:47.2069|INFO|HotelReservationSystem.Nlog|AddHotels(string customer) : passed
+2020-11-12 22:40:47.2234|DEBUG|HotelReservationSystem.Nlog|Debug successfull : CalculatingHotelPrices()
+2020-11-12 22:40:47.2234|INFO|HotelReservationSystem.Nlog|CalculatingHotelPrices() : passed
+2020-11-12 22:41:30.0148|DEBUG|HotelReservationSystem.Nlog|Debug Successfull  : AddHotels(string customer)
+2020-11-12 22:41:30.1932|INFO|HotelReservationSystem.Nlog|AddHotels(string customer) : passed
+2020-11-12 22:41:30.2046|ERROR|HotelReservationSystem.Nlog|Wrong dates are entered
+2020-11-12 22:41:30.2046|DEBUG|HotelReservationSystem.Nlog|Debug Unsuccessfull : CalculatingHotelPrices()
+2020-11-12 22:56:19.0661|DEBUG|HotelReservationSystem.Nlog|Debug Successfull  : AddHotels(string customer)
+2020-11-12 22:56:19.3130|INFO|HotelReservationSystem.Nlog|AddHotels(string customer) : passed
+2020-11-12 22:56:19.3232|DEBUG|HotelReservationSystem.Nlog|Debug successfull : CalculatingHotelPrices()
+2020-11-12 22:56:19.3232|INFO|HotelReservationSystem.Nlog|CalculatingHotelPrices() : passed
+2020-11-12 23:01:02.4837|DEBUG|HotelReservationSystem.Nlog|Debug Successfull  : AddHotels(string customer)
+2020-11-12 23:01:02.6639|INFO|HotelReservationSystem.Nlog|AddHotels(string customer) : passed
+2020-11-12 23:01:02.6810|DEBUG|HotelReservationSystem.Nlog|Debug successfull : CalculatingHotelPrices()
+2020-11-12 23:01:02.6810|INFO|HotelReservationSystem.Nlog|CalculatingHotelPrices() : passed

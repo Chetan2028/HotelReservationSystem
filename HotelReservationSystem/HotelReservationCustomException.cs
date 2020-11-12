@@ -8,7 +8,7 @@ namespace HotelReservationSystem
     {
         public enum ExceptionType
         {
-            INVALID_CUSTOMER, INVALID_DATE
+            INVALID_CUSTOMER, INVALID_DATE , INVALID_DATE_FORMAT
         }
 
         public ExceptionType type;
