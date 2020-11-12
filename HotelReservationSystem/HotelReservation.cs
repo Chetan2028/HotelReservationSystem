@@ -1,14 +1,18 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Linq;
 using System.Text;
 
 namespace HotelReservationSystem
 {
     class HotelReservation
     {
-
         List<Hotel> hotelList = new List<Hotel>();
-        SortedDictionary<int, string> ratesAndHotelsDictionary = new SortedDictionary<int, string>();
+        Dictionary<string, int> ratesAndHotelsDictionary = new Dictionary<string, int>();
+        ArrayList daysList = new ArrayList();
 
         /// <summary>
         /// UC1
@@ -28,6 +32,20 @@ namespace HotelReservationSystem
         }
 
         /// <summary>
+        /// UC4
+        /// Addings the days to list.
+        /// </summary>
+        /// <param name="checkInDate">The check in date.</param>
+        /// <param name="checkOutDate">The check out date.</param>
+        public void AddingDaysToList(DateTime checkInDate, DateTime checkOutDate)
+        {
+            while (checkOutDate >= checkInDate)
+            {
+                daysList.Add(checkInDate.DayOfWeek);
+                checkInDate = checkInDate.AddDays(1);
+            }
+        }
+        /// <summary>
         /// UC2
         /// Calculatings the hotel prices.
         /// </summary>
@@ -37,16 +55,22 @@ namespace HotelReservationSystem
         {
             if (checkInDate < checkOutDate)
             {
-                TimeSpan diff = checkOutDate.Subtract(checkInDate);
                 foreach (Hotel hotels in hotelList)
                 {
                     int total = 0;
-                    for (int i = 0; i < diff.TotalDays; i++)
+                    for (int index = 0; index < daysList.Count; index++)
                     {
-                        total = total + hotels.weekDayRegularRates;
+                        if (daysList[index].ToString().Equals("Saturday") || daysList[index].ToString().Equals("Sunday"))
+                        {
+                            total = total + hotels.weekendRegularRates;
+                        }
+                        else
+                        {
+                            total = total + hotels.weekDayRegularRates;
+                        }
                     }
                     Console.WriteLine("Hotel Name : {0} and Total Price : {1}", hotels.hotelName, total);
-                    ratesAndHotelsDictionary.Add(total, hotels.hotelName);
+                    ratesAndHotelsDictionary.Add(hotels.hotelName, total);
                 }
             }
             else
@@ -64,11 +88,8 @@ namespace HotelReservationSystem
         public void FindingCheapestHotel(DateTime checkInDate, DateTime checkOutDate)
         {
             CalculatingHotelPrices(checkInDate, checkOutDate);
-            foreach (var hotelPrice in ratesAndHotelsDictionary)
-            {
-                Console.WriteLine("Cheapest Hotel Name : {0} , Total Price : {1}", hotelPrice.Value, hotelPrice.Key);
-                break;
-            }
+            var val = ratesAndHotelsDictionary.OrderBy(kvp => kvp.Value).First();
+            Console.WriteLine("Cheapest hotel : {0} , Price : {1}", val.Key , val.Value);
         }
     }
 }

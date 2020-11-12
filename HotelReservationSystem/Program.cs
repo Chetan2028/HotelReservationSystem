@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace HotelReservationSystem
 {
@@ -17,7 +18,12 @@ namespace HotelReservationSystem
             Console.WriteLine(checkInDate.ToString("d"));
             DateTime checkOutDate = DateTime.Parse(checkOut);
             Console.WriteLine(checkOutDate.ToString("d"));
+            Console.WriteLine("Check in day : " + checkInDate.DayOfWeek);
+            Console.WriteLine("Checkout date day : " + checkOutDate.DayOfWeek);
+            hotelReservation.AddingDaysToList(checkInDate, checkOutDate);
             hotelReservation.FindingCheapestHotel(checkInDate, checkOutDate);
+
+
         }
     }
 }
