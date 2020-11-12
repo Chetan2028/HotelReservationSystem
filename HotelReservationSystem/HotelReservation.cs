@@ -10,9 +10,13 @@ namespace HotelReservationSystem
 {
     class HotelReservation
     {
+        //Adding hotels in list
         List<Hotel> hotelList = new List<Hotel>();
+        //Adding hotel names and rates 
         List<Hotel> ratesAndHotelsList = new List<Hotel>();
+        //Adding days 
         ArrayList daysList = new ArrayList();
+        //Adding cheapest hotel
         List<Hotel> hotellistWithMinPrices = new List<Hotel>();
 
         /// <summary>
@@ -47,7 +51,7 @@ namespace HotelReservationSystem
             }
             else
             {
-                Console.WriteLine("Invalid customer type");
+                throw new HotelReservationCustomException(HotelReservationCustomException.ExceptionType.INVALID_CUSTOMER, "Customer is Invalid");
             }
         }
 
@@ -95,7 +99,7 @@ namespace HotelReservationSystem
             }
             else
             {
-                Console.WriteLine("Please enter dates properly");
+                throw new HotelReservationCustomException(HotelReservationCustomException.ExceptionType.INVALID_DATE, "Invalid Dates");
             }
         }
 
