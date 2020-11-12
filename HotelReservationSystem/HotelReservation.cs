@@ -25,34 +25,42 @@ namespace HotelReservationSystem
         /// </summary>
         public void AddHotels(string customer)
         {
-            if(customer.Equals("Regular",StringComparison.InvariantCultureIgnoreCase))
+            try
             {
-                hotelList.Add(new Hotel("Lakewood", 110, 90, 3));
-                hotelList.Add(new Hotel("Bridgewood", 150, 50, 4));
-                hotelList.Add(new Hotel("Ridgewood", 220, 150, 5));
-
-                Console.WriteLine("Hotels for {0} customer added in List",customer);
-                foreach (Hotel hotels in hotelList) 
+                if (customer.Equals("Regular", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRates} , WeekendRates : {hotels.weekendRates} , Rating : {hotels.hotelRatings}");
+                    hotelList.Add(new Hotel("Lakewood", 110, 90, 3));
+                    hotelList.Add(new Hotel("Bridgewood", 150, 50, 4));
+                    hotelList.Add(new Hotel("Ridgewood", 220, 150, 5));
+
+                    Console.WriteLine("Hotels for {0} customer added in List", customer);
+                    foreach (Hotel hotels in hotelList)
+                    {
+                        Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRates} , WeekendRates : {hotels.weekendRates} , Rating : {hotels.hotelRatings}");
+                    }
+                }
+                else if (customer.Equals("reward", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    hotelList.Add(new Hotel("Lakewood", 80, 80, 3));
+                    hotelList.Add(new Hotel("Bridgewood", 110, 50, 4));
+                    hotelList.Add(new Hotel("Ridgewood", 100, 400, 5));
+
+                    Console.WriteLine("Hotels for {0} customer added in List", customer);
+                    foreach (Hotel hotels in hotelList)
+                    {
+                        Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRates} , WeekendRates : {hotels.weekendRates} , Rating : {hotels.hotelRatings}");
+                    }
+                }
+                else
+                {
+                    throw new HotelReservationCustomException(HotelReservationCustomException.ExceptionType.INVALID_CUSTOMER, "Customer is Invalid");
                 }
             }
-            else if(customer.Equals("reward", StringComparison.InvariantCultureIgnoreCase))
+            catch(HotelReservationCustomException ex)
             {
-                hotelList.Add(new Hotel("Lakewood", 80, 80, 3));
-                hotelList.Add(new Hotel("Bridgewood", 110, 50, 4));
-                hotelList.Add(new Hotel("Ridgewood", 100, 400, 5));
-
-                Console.WriteLine("Hotels for {0} customer added in List",customer);
-                foreach (Hotel hotels in hotelList)
-                {
-                    Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRates} , WeekendRates : {hotels.weekendRates} , Rating : {hotels.hotelRatings}");
-                }
+                Console.WriteLine(ex.Message);
             }
-            else
-            {
-                throw new HotelReservationCustomException(HotelReservationCustomException.ExceptionType.INVALID_CUSTOMER, "Customer is Invalid");
-            }
+           
         }
 
         /// <summary>
@@ -77,30 +85,38 @@ namespace HotelReservationSystem
         /// <param name="checkOutDate">The check out date.</param>
         public void CalculatingHotelPrices(DateTime checkInDate, DateTime checkOutDate)
         {
-            if (checkInDate < checkOutDate)
+            try
             {
-                foreach (Hotel hotels in hotelList)
+                if (checkInDate < checkOutDate)
                 {
-                    int total = 0;
-                    for (int index = 0; index < daysList.Count; index++)
+                    foreach (Hotel hotels in hotelList)
                     {
-                        if (daysList[index].ToString().Equals("Saturday") || daysList[index].ToString().Equals("Sunday"))
+                        int total = 0;
+                        for (int index = 0; index < daysList.Count; index++)
                         {
-                            total = total + hotels.weekendRates;
+                            if (daysList[index].ToString().Equals("Saturday") || daysList[index].ToString().Equals("Sunday"))
+                            {
+                                total = total + hotels.weekendRates;
+                            }
+                            else
+                            {
+                                total = total + hotels.weekDayRates;
+                            }
                         }
-                        else
-                        {
-                            total = total + hotels.weekDayRates;
-                        }
+                        ratesAndHotelsList.Add(new Hotel(total, hotels.hotelName, hotels.hotelRatings));
+                        Console.WriteLine($"Hotel : {hotels.hotelName} \tPrice : {total} \tRating : {hotels.hotelRatings}");
                     }
-                    ratesAndHotelsList.Add(new Hotel(total, hotels.hotelName, hotels.hotelRatings));
-                    Console.WriteLine($"Hotel : {hotels.hotelName} \tPrice : {total} \tRating : {hotels.hotelRatings}");
+                }
+                else
+                {
+                    throw new HotelReservationCustomException(HotelReservationCustomException.ExceptionType.INVALID_DATE, "Invalid Dates");
                 }
             }
-            else
+            catch(HotelReservationCustomException ex)
             {
-                throw new HotelReservationCustomException(HotelReservationCustomException.ExceptionType.INVALID_DATE, "Invalid Dates");
+                Console.WriteLine(ex.Message);
             }
+            
         }
 
         /// <summary>
