@@ -70,8 +70,8 @@ namespace HotelReservationSystem
                             total = total + hotels.weekDayRegularRates;
                         }
                     }
-                    Console.WriteLine("Hotel Name : {0} and Total Price : {1}", hotels.hotelName, total);
                     ratesAndHotelsList.Add(new Hotel(total, hotels.hotelName, hotels.hotelRatings));
+                    Console.WriteLine($"Hotel : {hotels.hotelName} \tPrice : {total} \tRating : {hotels.hotelRatings}");
                 }
             }
             else
@@ -96,6 +96,7 @@ namespace HotelReservationSystem
                 {
                     //adding hotel with min prices in another list
                     hotellistWithMinPrices.Add(hotels);
+                    Console.WriteLine($"Hotel Name : {hotels.hotelName} \nTotal Price : {hotels.totalPrice} \nRating : {hotels.hotelRatings}");
                 }
 
             }
@@ -107,6 +108,25 @@ namespace HotelReservationSystem
                 {
                     Console.WriteLine("----------------CHEAPEST HOTEL WITH BEST RATINGS--------------------");
                     Console.WriteLine($"Hotel Name : {hotels.hotelName} \nTotal Price : {hotels.totalPrice} \nRating : {hotels.hotelRatings}");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Findings the hotel with best rating.
+        /// </summary>
+        /// <param name="checkInDate">The check in date.</param>
+        /// <param name="checkOutDate">The check out date.</param>
+        public void FindingHotelWithBestRating(DateTime checkInDate , DateTime checkOutDate)
+        {
+            CalculatingHotelPrices(checkInDate, checkOutDate);
+            foreach (Hotel hotels in ratesAndHotelsList)
+            {
+                if (hotels.hotelRatings == ratesAndHotelsList.Max(r => r.hotelRatings))
+                {
+                    Console.WriteLine("----------------------------------BEST RATED HOTEL--------------------------");
+                    Console.WriteLine($"Hotel Name : {hotels.hotelName} \nTotal Price : {hotels.totalPrice} \nRating : {hotels.hotelRatings}");
+                    break;
                 }
             }
         }
