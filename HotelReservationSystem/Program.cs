@@ -21,9 +21,7 @@ namespace HotelReservationSystem
             Console.WriteLine("Check in day : " + checkInDate.DayOfWeek);
             Console.WriteLine("Checkout date day : " + checkOutDate.DayOfWeek);
             hotelReservation.AddingDaysToList(checkInDate, checkOutDate);
-            hotelReservation.FindingCheapestHotel(checkInDate, checkOutDate);
-
-
+            hotelReservation.FindingCheapestHotelWithBestRating(checkInDate, checkOutDate);
         }
     }
 }

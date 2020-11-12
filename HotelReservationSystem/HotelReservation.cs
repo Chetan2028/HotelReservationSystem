@@ -86,7 +86,7 @@ namespace HotelReservationSystem
         /// </summary>
         /// <param name="checkInDate">The check in date.</param>
         /// <param name="checkOutDate">The check out date.</param>
-        public void FindingCheapestHotel(DateTime checkInDate, DateTime checkOutDate)
+        public void FindingCheapestHotelWithBestRating(DateTime checkInDate, DateTime checkOutDate)
         {
             CalculatingHotelPrices(checkInDate, checkOutDate);
             foreach (Hotel hotels in ratesAndHotelsList.OrderBy(r => r.totalPrice).ToList())
