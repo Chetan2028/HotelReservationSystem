@@ -11,17 +11,19 @@ namespace HotelReservationSystem
         public int weekDayRegularRates;
         public int weekendRegularRates;
         public int hotelRatings;
+        public int totalPrice;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Hotel"/> class.
         /// </summary>
-        /// <param name="hotelName">Name of the hotel.</param>
+        /// <param name="totalPrice">The total price.</param>
         /// <param name="weekDayRegularRates">The week day regular rates.</param>
-        public Hotel(string hotelName , int weekDayRegularRates , int weekendRegularRates)
+        /// <param name="weekendRegularRates">The weekend regular rates.</param>
+        public Hotel(int totalPrice, string hotelName , int hotelRatings)
         {
+            this.totalPrice = totalPrice;
             this.hotelName = hotelName;
-            this.weekDayRegularRates = weekDayRegularRates;
-            this.weekendRegularRates = weekendRegularRates;
+            this.hotelRatings = hotelRatings;
         }
 
         /// <summary>

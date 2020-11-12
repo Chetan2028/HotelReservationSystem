@@ -11,8 +11,9 @@ namespace HotelReservationSystem
     class HotelReservation
     {
         List<Hotel> hotelList = new List<Hotel>();
-        Dictionary<string, int> ratesAndHotelsDictionary = new Dictionary<string, int>();
+        List<Hotel> ratesAndHotelsList = new List<Hotel>();
         ArrayList daysList = new ArrayList();
+        List<Hotel> hotellistWithMinPrices = new List<Hotel>();
 
         /// <summary>
         /// UC1
@@ -20,14 +21,14 @@ namespace HotelReservationSystem
         /// </summary>
         public void AddHotels()
         {
-            hotelList.Add(new Hotel("Lakewood", 110, 90));
-            hotelList.Add(new Hotel("Bridgewood", 150, 50));
-            hotelList.Add(new Hotel("Ridgewood", 220, 150));
+            hotelList.Add(new Hotel("Lakewood", 110, 90, 3));
+            hotelList.Add(new Hotel("Bridgewood", 150, 50, 4));
+            hotelList.Add(new Hotel("Ridgewood", 220, 150, 5));
 
             Console.WriteLine("Hotels are added in List");
             foreach (Hotel hotels in hotelList)
             {
-                Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRegularRates} , WeekendRates : {hotels.weekendRegularRates}");
+                Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRegularRates} , WeekendRates : {hotels.weekendRegularRates} , Rating : {hotels.hotelRatings}");
             }
         }
 
@@ -70,7 +71,7 @@ namespace HotelReservationSystem
                         }
                     }
                     Console.WriteLine("Hotel Name : {0} and Total Price : {1}", hotels.hotelName, total);
-                    ratesAndHotelsDictionary.Add(hotels.hotelName, total);
+                    ratesAndHotelsList.Add(new Hotel(total, hotels.hotelName, hotels.hotelRatings));
                 }
             }
             else
@@ -88,8 +89,26 @@ namespace HotelReservationSystem
         public void FindingCheapestHotel(DateTime checkInDate, DateTime checkOutDate)
         {
             CalculatingHotelPrices(checkInDate, checkOutDate);
-            var val = ratesAndHotelsDictionary.OrderBy(kvp => kvp.Value).First();
-            Console.WriteLine("Cheapest hotel : {0} , Price : {1}", val.Key , val.Value);
+            foreach (Hotel hotels in ratesAndHotelsList.OrderBy(r => r.totalPrice).ToList())
+            {
+                //printing the hotels with minimum rates
+                if (hotels.totalPrice == ratesAndHotelsList.Min(r => r.totalPrice))
+                {
+                    //adding hotel with min prices in another list
+                    hotellistWithMinPrices.Add(hotels);
+                }
+
+            }
+            //Iterating through a list of minimum hotel price
+            foreach (Hotel hotels in hotellistWithMinPrices)
+            {
+                //finding out hotel with maximum rating
+                if (hotels.hotelRatings == hotellistWithMinPrices.Max(r => r.hotelRatings))
+                {
+                    Console.WriteLine("----------------CHEAPEST HOTEL WITH BEST RATINGS--------------------");
+                    Console.WriteLine($"Hotel Name : {hotels.hotelName} \nTotal Price : {hotels.totalPrice} \nRating : {hotels.hotelRatings}");
+                }
+            }
         }
     }
 }
