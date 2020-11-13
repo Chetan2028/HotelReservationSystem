@@ -126,7 +126,7 @@ namespace HotelReservationSystem
                 {
                     Console.WriteLine("----------------------------------BEST RATED HOTEL--------------------------");
                     Console.WriteLine($"Hotel Name : {hotels.hotelName} \nTotal Price : {hotels.totalPrice} \nRating : {hotels.hotelRatings}");
-                    break;
+                    
                 }
             }
         }
