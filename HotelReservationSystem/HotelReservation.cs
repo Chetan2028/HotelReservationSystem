@@ -20,14 +20,14 @@ namespace HotelReservationSystem
         /// </summary>
         public void AddHotels()
         {
-            hotelList.Add(new Hotel("Lakewood", 110, 90));
-            hotelList.Add(new Hotel("Bridgewood", 150, 50));
-            hotelList.Add(new Hotel("Ridgewood", 220, 150));
+            hotelList.Add(new Hotel("Lakewood", 110, 90, 3));
+            hotelList.Add(new Hotel("Bridgewood", 150, 50, 4));
+            hotelList.Add(new Hotel("Ridgewood", 220, 150, 5));
 
             Console.WriteLine("Hotels are added in List");
             foreach (Hotel hotels in hotelList)
             {
-                Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRegularRates} , WeekendRates : {hotels.weekendRegularRates}");
+                Console.WriteLine($"Hotel Name: {hotels.hotelName} , WeekDayRates : {hotels.weekDayRegularRates} , WeekendRates : {hotels.weekendRegularRates} , Ratings : {hotels.hotelRatings}");
             }
         }
 
@@ -89,7 +89,7 @@ namespace HotelReservationSystem
         {
             CalculatingHotelPrices(checkInDate, checkOutDate);
             var val = ratesAndHotelsDictionary.OrderBy(kvp => kvp.Value).First();
-            Console.WriteLine("Cheapest hotel : {0} , Price : {1}", val.Key , val.Value);
+            Console.WriteLine("Cheapest hotel : {0} , Price : {1}", val.Key, val.Value);
         }
     }
 }
